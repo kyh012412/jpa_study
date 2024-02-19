@@ -16,18 +16,13 @@ public class CustomerJpaExam {
 
         tx.begin();
         try{
-            //실제넣을객체를 persist로 전달
-            //em.persist(Customer.sample());
+            Customer customer = new Customer("ID0004","Kim");
+//            em.persist(customer); // insert X persist가 insert인것은 아님
 
-            Customer foundCustomer = em.find(Customer.class, "ID0001");
-            //System.out.println(foundCustomer.toString());
+            Customer cus02 = em.find(Customer.class,"ID0004");
+            System.out.println(cus02.toString());
 
-//            foundCustomer.setName("Park");
-            em.remove(foundCustomer);
-
-//            em.persist(foundCustomer);
-
-            tx.commit();
+            tx.commit(); // 이때 인설트됨
             System.out.println("커밋완료");
         }catch(Exception e){
             // 문제가 있었을때는 tx.rollback()
