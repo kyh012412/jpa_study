@@ -15,18 +15,15 @@ public class CustomerJpaExam {
 
         tx.begin();
         try{
-            Customer customer = new Customer("ID0004","Lee"); //비영속 상태(new)
+            Customer customer = new Customer("ID0005","Jin"); //비영속 상태(new)
             em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
             //이 위까지만 햇을때에는 db에 반영되지 않는다.
+            
+            em.detach(customer); // customer을 detach해서 준영속상태(Detached)를 만들고싶음
 
-            //위가 적용된 상태인 것처럼 작업하기위해서는 flush();
-            em.flush(); // insert 쿼리가 나가고있지만 커밋은 안 햇음
-
-            Query query = em.createQuery("SELECT c from Customer c",Customer.class);
-            List<Customer> customers = query.getResultList();
-
-            System.out.println(customers);
-
+            //1차 캐시에 들어있기 때문에 select가 나가지 않는다.
+            Customer foundCustomer = em.find(Customer.class,"ID0005");
+            System.out.println(foundCustomer);
 
 
 
