@@ -18,8 +18,11 @@ public class Student {
     private Long studentId;
     private String name;
     private String grade;
-    private Long majorId;
-    //private Major major;
+//    private Long majorId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "majorid")
+    private Major major;
 
     public Student(String name,String grade){
         this.name = name;

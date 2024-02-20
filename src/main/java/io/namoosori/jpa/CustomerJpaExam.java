@@ -23,7 +23,7 @@ public class CustomerJpaExam {
             em.persist(major);
 
             Student student = new Student("Kim","3");
-            student.setMajorId(major.getMajorId());
+            student.setMajor(major);
             em.persist(student);
 
             em.flush();
@@ -31,10 +31,12 @@ public class CustomerJpaExam {
 
             //student 검색
             Student foundStudent = em.find(Student.class,1);
-            System.out.println(foundStudent);
+            System.out.println(foundStudent.getMajor().getName());
+//            Major foundMajor = em.find(Major.class,foundStudent.getMajor());
+//            System.out.println(foundStudent);
 
-            Major foundMajor = em.find(Major.class,foundStudent.getMajorId());
-            System.out.println(foundMajor);
+//            Major foundMajor = em.find(Major.class,foundStudent.getMajor());
+//            System.out.println(foundMajor);
 
             tx.commit();
         }catch(Exception e){

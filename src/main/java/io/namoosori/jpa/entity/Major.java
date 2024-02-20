@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +22,8 @@ public class Major {
     private Long majorId;
     private String name;
     private String category;
+
+    private List<Student> students;
 
     public Major(String name,String category){
         this.name = name;
