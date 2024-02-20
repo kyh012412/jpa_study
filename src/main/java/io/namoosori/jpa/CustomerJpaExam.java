@@ -15,15 +15,15 @@ public class CustomerJpaExam {
 
         tx.begin();
         try{
-            Customer customer = new Customer("ID0005","Jin"); //비영속 상태(new)
+            Customer customer = new Customer(5L,"Jin"); //비영속 상태(new)
             em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
             //이 위까지만 햇을때에는 db에 반영되지 않는다.
             
-            em.detach(customer); // customer을 detach해서 준영속상태(Detached)를 만들고싶음
-
-            //1차 캐시에 들어있기 때문에 select가 나가지 않는다.
-            Customer foundCustomer = em.find(Customer.class,"ID0005");
-            System.out.println(foundCustomer);
+//            em.detach(customer); // customer을 detach해서 준영속상태(Detached)를 만들고싶음
+//
+//            //1차 캐시에 들어있기 때문에 select가 나가지 않는다.
+//            Customer foundCustomer = em.find(Customer.class,"ID0005");
+//            System.out.println(foundCustomer);
 
 
 
