@@ -1,8 +1,6 @@
 package io.namoosori.jpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -14,6 +12,7 @@ import lombok.*;
 public class Customer {
 
     @Id //pk임을 알려줌
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private long registerDate;

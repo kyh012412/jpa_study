@@ -15,19 +15,16 @@ public class CustomerJpaExam {
 
         tx.begin();
         try{
-            Customer customer = new Customer(5L,"Jin"); //비영속 상태(new)
+            Customer customer = new Customer(); //비영속 상태(new)
+            customer.setName("Kim");
+            customer.setRegisterDate(System.currentTimeMillis());
+
+            //실질 id를 알기위해서 이시점에 insert가 됨
             em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
-            //이 위까지만 햇을때에는 db에 반영되지 않는다.
-            
-//            em.detach(customer); // customer을 detach해서 준영속상태(Detached)를 만들고싶음
-//
-//            //1차 캐시에 들어있기 때문에 select가 나가지 않는다.
-//            Customer foundCustomer = em.find(Customer.class,"ID0005");
-//            System.out.println(foundCustomer);
 
+            System.out.println("=========Before Commit========");
 
-
-                //flush와 commit의 개념 구분이 필요
+            //flush와 commit의 개념 구분이 필요
             tx.commit(); // 이때 인설트됨 // h2-conosle에서 db를 바라봐도 올바른 조회가 가능
             System.out.println("커밋완료");
         }catch(Exception e){
