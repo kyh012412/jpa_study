@@ -15,12 +15,14 @@ public class CustomerJpaExam {
 
         tx.begin();
         try{
-            Customer customer = new Customer(); //비영속 상태(new)
-            customer.setName("Kim");
-            customer.setRegisterDate(System.currentTimeMillis());
+            for(int i=0;i<100;i++){
+                Customer customer = new Customer(); //비영속 상태(new)
+                customer.setName("Kim");
+                customer.setRegisterDate(System.currentTimeMillis());
 
-            //실질 id를 알기위해서 이시점에 insert가 됨
-            em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
+                //실질 id를 알기위해서 이시점에 insert가 됨
+                em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
+            }
 
             System.out.println("=========Before Commit========");
 
@@ -35,7 +37,5 @@ public class CustomerJpaExam {
             em.close();
         }
         emf.close();
-
-
     }
 }
