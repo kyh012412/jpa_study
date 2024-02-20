@@ -1,7 +1,10 @@
 package io.namoosori.jpa;
 
 import io.namoosori.jpa.entity.Customer;
+import io.namoosori.jpa.entity.Major;
+import io.namoosori.jpa.entity.Student;
 import jakarta.persistence.*;
+import jdk.jfr.Category;
 import org.hibernate.internal.build.AllowSysOut;
 
 import java.util.List;
@@ -16,19 +19,24 @@ public class CustomerJpaExam {
         tx.begin();
 
         try{
-            Customer customer = new Customer(); //비영속 상태(new)
-            customer.setName("Kim");
-            customer.setRegisterDate(System.currentTimeMillis());
+            Major major = new Major("Computer Science","College of Engineering");
+            em.persist(major);
 
-            //실질 id를 알기위해서 이시점에 insert가 됨
-            em.persist(customer); //Customer 객체가 영속 상태(Managed) 가 된다.
+            Student student = new Student("Kim","3");
+            student.setMajorId(major.getMajorId());
+            em.persist(student);
 
-            System.out.println("=========Before Commit========");
+            em.flush();
+            em.clear();
 
-            //flush와 commit의 개념 구분이 필요
-            tx.commit(); // 이때 인설트됨 // h2-conosle에서 db를 바라봐도 올바른 조회가 가능
-            System.out.println("커밋완료");
+            //student 검색
+            Student foundStudent = em.find(Student.class,1);
+            System.out.println(foundStudent);
 
+            Major foundMajor = em.find(Major.class,foundStudent.getMajorId());
+            System.out.println(foundMajor);
+
+            tx.commit();
         }catch(Exception e){
             // 문제가 있었을때는 tx.rollback()
             tx.rollback();

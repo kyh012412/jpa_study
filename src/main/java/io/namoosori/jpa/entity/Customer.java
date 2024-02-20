@@ -12,7 +12,7 @@ import lombok.*;
 public class Customer {
 
     @Id //pk임을 알려줌
-    @Column(name = "user_id",nullable = false,length = 1)
+//    @Column(name = "user_id",nullable = false,length = 1)
     private Long id;
     private String name;
     //@Column 어노테이션 없으면 해당필드는 기본적으로 @Basic어노테이션임
