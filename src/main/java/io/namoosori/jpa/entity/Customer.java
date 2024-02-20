@@ -9,18 +9,13 @@ import lombok.*;
 @Setter
 @Entity//Customer는 테이블에 들어갈 entity임을 명시
 @Table(name="customer_tb")//(어느테이블에 들어갈지) 들어가게 될 테이블명 명시
-@SequenceGenerator(
-        name="customer_generator",
-        sequenceName = "customer_sq",
-        initialValue = 1,
-        allocationSize = 50)
 public class Customer {
 
     @Id //pk임을 알려줌
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "my_seq")
-    @SequenceGenerator(name="my_seq",sequenceName = "db_seq")
+    @Column(name = "user_id",nullable = false,length = 1)
     private Long id;
     private String name;
+    //@Column 어노테이션 없으면 해당필드는 기본적으로 @Basic어노테이션임
     private long registerDate;
 
     //디폴트 생성자가 없는 상태
